@@ -11,20 +11,24 @@ export class WeatherPage {
 
 	weather;
 	zmw: string;
+	searchStr: string;
+	results;
+	state: string = 'GA';
+	city: string = 'Atlanta';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public weatherService: WeatherService) {
   	
   }
 
   ionViewDidLoad() {
-    // console.log('ionViewDidLoad WeatherPage');
+
   }
 
   ngOnInit(){
   	this.getDefaultCity();
-  	this.weatherService.getWeather(this.zmw)
+  	this.weatherService.getWeather(this.state, this.city)
   		.subscribe(weather => {
-  			console.log(weather);
+  			// console.log(weather);
   			this.weather = weather.current_observation;
   		})
   }
@@ -37,8 +41,17 @@ export class WeatherPage {
   	// }
   		// this.zmw = '02101.1.99999';
             this.zmw = '02101.1.99999';   
-  		
+  }
 
+  getQuery(){
+  	
+  	this.weatherService.searchCities(this.searchStr)
+  		.subscribe(res => {
+  			// console.log(res);
+  			this.results = res.RESULTS
+  			
+
+  		});
   }
 
 }
