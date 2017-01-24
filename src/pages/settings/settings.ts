@@ -10,10 +10,33 @@ import { WeatherPage } from '../weather/weather';
 })
 export class SettingsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+	searchStr: string;
+	defaultCity: string;
+	results;
+
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public weatherService: WeatherService) {
+  	this.results = [];
+  }
 
   ionViewDidLoad() {
   
+  }
+
+  ngOnInit(){
+  	this.getDefaultCity();
+  }
+
+  getDefaultCity(){
+         
+  }
+
+  getQuery(){
+  	// console.log(this.searchStr)
+  	this.weatherService.searchCities(this.searchStr)
+  		.subscribe(res => {
+  			this.results = res.RESULTS;
+  		})
   }
 
 }

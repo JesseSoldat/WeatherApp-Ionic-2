@@ -26,7 +26,7 @@ export class WeatherPage {
 
   ngOnInit(){
   	this.getDefaultCity();
-  	this.weatherService.getWeather(this.state, this.city)
+  	this.weatherService.getWeather(this.zmw)
   		.subscribe(weather => {
   			// console.log(weather);
   			this.weather = weather.current_observation;
@@ -37,21 +37,29 @@ export class WeatherPage {
   	// if(localStorage.city !== undefined){
   	// 	this.zmw = JSON.parse(localStorage.city).zmw;
   	// } else {
-  	// 	this.zmw = '02101.1.99999';
+     //   this.zmw = '10001.11.99999';   
   	// }
-  		// this.zmw = '02101.1.99999';
-            this.zmw = '02101.1.99999';   
+  
+        this.zmw = '10001.11.99999';   
   }
 
-  getQuery(){
-  	
+  getQuery(){	
   	this.weatherService.searchCities(this.searchStr)
   		.subscribe(res => {
   			// console.log(res);
   			this.results = res.RESULTS
-  			
-
   		});
+  }
+
+  chooseCity(city){
+  	// console.log(city);
+  	this.results = [];
+  	this.weatherService.getWeather(city.zmw)
+  		.subscribe(weather => {
+  			this.weather = weather.current_observation;
+  			this.searchStr = '';
+  		});
+
   }
 
 }

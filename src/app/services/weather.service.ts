@@ -19,10 +19,15 @@ export class WeatherService {
     
 	}
 
-	getWeather(state, city){
-		console.log(state, city)
-		return this.http.get(this.conditionsUrl+'/'+state+'/'+city+'.json')
+	// getWeather(state, city){
+	// 	return this.http.get(this.conditionsUrl+'/'+state+'/'+city+'.json')
+	// 		.map(res => res.json());
+	// }
+
+	getWeather(zmw){
+		return this.http.get(this.conditionsUrl+'/zmw:'+zmw+'.json')
 			.map(res => res.json());
+
 	}
 
 	searchCities(searchStr){
