@@ -28,6 +28,15 @@ export class SettingsPage {
   }
 
   getDefaultCity(){
+
+  	if(JSON.parse(localStorage.getItem('city')) !== null){
+  		// console.log(localStorage.getItem('city'))
+  		let temp = JSON.parse(localStorage.getItem('city'));
+  		this.defaultCity = temp.name;
+  		console.log(temp)
+  	} else {
+  		console.log('No Default City');
+  	}
          
   }
 
@@ -37,6 +46,22 @@ export class SettingsPage {
   		.subscribe(res => {
   			this.results = res.RESULTS;
   		})
+  }
+
+  setDefaultCity(city){
+  	this.results = [];
+
+  	if(typeof(Storage) !== "undefined"){
+  		localStorage.setItem("city", JSON.stringify(city));
+  		this.searchStr = city.name;
+  		this.getDefaultCity();
+  	} else {
+  		console.log('LocalStorage Not Supported')
+  	}
+  }
+
+  saveChanges(){
+  	this.navCtrl.setRoot(WeatherPage);
   }
 
 }

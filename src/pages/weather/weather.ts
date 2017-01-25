@@ -34,13 +34,12 @@ export class WeatherPage {
   }
 
   getDefaultCity(){
-  	// if(localStorage.city !== undefined){
-  	// 	this.zmw = JSON.parse(localStorage.city).zmw;
-  	// } else {
-     //   this.zmw = '10001.11.99999';   
-  	// }
-  
-        this.zmw = '10001.11.99999';   
+  	if(JSON.parse(localStorage.getItem('city')) !== null) {
+  	let temp = JSON.parse(localStorage.getItem('city'));
+  	this.zmw = temp.zmw;
+  	} else {
+       this.zmw = '10001.11.99999';   
+  	}
   }
 
   getQuery(){	

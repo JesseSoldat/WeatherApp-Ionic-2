@@ -18,12 +18,12 @@
 						<ion-input (keyup)=getQuery() [(ngModel)]="searchStr" type="text" value="" name="searchStr">
 						</ion-input>
 					</ion-item>
-					<p class="current">Current: </p>
-					<button ion-button block>Save Changes</button>
+					<p class="current">Current: {{defaultCity}}</p>
+					<button (click)="saveChanges()" ion-button block>Save Changes</button>
 				</ion-list>
 
 				<ion-list>
-					<ion-item *ngFor="let result of results">
+					<ion-item *ngFor="let result of results" (click)="setDefaultCity(result)">
 					{{result.name}}
 					</ion-item>
 				</ion-list>
